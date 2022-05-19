@@ -17,9 +17,11 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 class HibobStream(RESTStream):
     """Hibob stream class."""
 
-    # url_base = "https://api.mysample.com"
+    @property
+    def schema_filepath(self) -> Path:
+        """Dynamicaly set schema_filepath"""
+        return SCHEMAS_DIR / f"{self.name}.json"
 
-    # OR use a dynamic url_base:
     @property
     def url_base(self) -> str:
         """Return the API URL root, configurable via tap settings."""
