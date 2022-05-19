@@ -6,7 +6,7 @@
         },
         "companyId":
         {
-            "type": ["null", "string"]
+            "type": ["null", "integer"]
         },
         "fullName": {
             "type": ["null","string"]
@@ -21,8 +21,7 @@
             "type": ["null", "string"]
         },
         "creationDateTime": {
-            "type": ["null","string"],
-            "format": "date-time"
+            "type": ["null","string"]
         },
         "work": {
             "type": ["object", "null"],
