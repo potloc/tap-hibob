@@ -25,16 +25,16 @@ class TapHibob(Tap):
     # TODO: Update this section with the actual config values you expect:
     config_jsonschema = th.PropertiesList(
         th.Property(
-            "auth_token",
+            "username",
             th.StringType,
             required=True,
-            description="The token to authenticate against the API service"
+            description="Account username (only for service accounts)"
         ),
         th.Property(
-            "project_ids",
-            th.ArrayType(th.StringType),
+            "password",
+            th.StringType,
             required=True,
-            description="Project IDs to replicate"
+            description="Token associated to service account"
         ),
         th.Property(
             "start_date",
@@ -44,7 +44,7 @@ class TapHibob(Tap):
         th.Property(
             "api_url",
             th.StringType,
-            default="https://api.mysample.com",
+            default="https://api.hibob.com",
             description="The url for the API service"
         ),
     ).to_dict()
