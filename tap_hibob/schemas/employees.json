@@ -1,0 +1,77 @@
+{
+    "type": ["object", "null"],
+    "properties":{
+        "id": {
+            "type": ["null", "string"]
+        },
+        "companyId":
+        {
+            "type": ["null", "string"]
+        },
+        "fullName": {
+            "type": ["null","string"]
+        },
+        "displayName": {
+            "type": ["null","string"]
+        },
+        "surname": {
+            "type": ["null", "string"]
+        },
+        "firstName": {
+            "type": ["null", "string"]
+        },
+        "creationDateTime": {
+            "type": ["null","string"],
+            "format": "date-time"
+        },
+        "work": {
+            "type": ["object", "null"],
+            "properties": {
+                "start_date": {
+                    "type": ["null", "string"]
+                },
+                "manager": {
+                    "type": ["null", "string"]
+                },
+                "reportsToIdInCompany": {
+                    "type": ["null", "integer"]
+                },
+                "employeeIdInCompany": {
+                    "type": ["null", "integer"]
+                },
+                "reportsTo": {
+                    "type": ["null", "object"],
+                    "properties":{
+                        "fullName": {
+                            "type": ["null","string"]
+                        },
+                        "displayName": {
+                            "type": ["null","string"]
+                        },
+                        "surname": {
+                            "type": ["null", "string"]
+                        },
+                        "id": {
+                            "type": ["null", "string"]
+                        }
+                    }
+                },
+                "department": {
+                    "type": ["null", "string"]
+                },
+                "siteId": {
+                    "type": ["null", "integer"]
+                },
+                "isManager": {
+                    "type": ["null", "boolean"]
+                },
+                "title": {
+                    "type": ["null", "string"]
+                },
+                "site": {
+                    "type": ["null", "string"]
+                }
+            }
+        }
+    }
+  }
