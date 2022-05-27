@@ -8,6 +8,9 @@
         {
             "type": ["null", "integer"]
         },
+        "email": {
+            "type": ["null", "string"]
+        },
         "fullName": {
             "type": ["null","string"]
         },
