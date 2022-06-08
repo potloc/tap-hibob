@@ -2,7 +2,7 @@ from singer_sdk import typing as th  # JSON Schema typing helpers
 
 schema = th.PropertiesList(
     th.Property("id", th.StringType),
-    th.Property("company_id", th.IntegerType),
+    th.Property("companyId", th.IntegerType),
     th.Property("email", th.StringType),
     th.Property("fullName", th.StringType),
     th.Property("firstName", th.StringType),
@@ -31,6 +31,31 @@ schema = th.PropertiesList(
             th.Property("site", th.StringType),
 
         )
-    )
+    ),
+    th.Property("internal",
+        th.ObjectType(
+            th.Property("periodSinceTermination",
+                th.ObjectType(
+                    th.Property("humanize", th.StringType),
+                    th.Property("sortFactor", th.IntegerType),
+                    th.Property("periodISO", th.StringType),
+                )
+            ),
+            th.Property("yearsSinceTermination", th.NumberType),
+            th.Property("terminationReason", th.StringType),
+            th.Property("probationEndDate", th.DateType),
+            th.Property("currentActiveStatusStartDate", th.DateType),
+            th.Property("terminationDate", th.DateType),
+            th.Property("status", th.StringType),
+            th.Property("terminationType", th.StringType),
+            th.Property("notice",
+                th.ObjectType(
+                    th.Property("length", th.IntegerType),
+                    th.Property("unit", th.StringType),
+                )
+            ),
+            th.Property("lifecycleStatus", th.StringType),
+        )
+    ),
 ).to_dict()
 
