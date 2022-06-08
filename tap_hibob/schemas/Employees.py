@@ -8,7 +8,7 @@ schema = th.PropertiesList(
     th.Property("firstName", th.StringType),
     th.Property("surname", th.StringType),
     th.Property("displayName", th.StringType),
-    th.Property("creationDateTime", th.DateTimeType),
+    th.Property("creationDateTime", th.StringType),
     th.Property("work",
         th.ObjectType(
             th.Property("start_date", th.DateTimeType),
