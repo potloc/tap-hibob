@@ -13,7 +13,6 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 from tap_hibob.schemas import Employees
 
 class EmployeesStream(HibobStream):
-    _LOG_REQUEST_METRIC_URLS=True
     """Define custom stream."""
     name = "employees"
     path = "/v1/people"
