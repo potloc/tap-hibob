@@ -17,10 +17,10 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 class HibobStream(RESTStream):
     """Hibob stream class."""
 
-    @property
-    def schema_filepath(self) -> Path:
-        """Dynamicaly set schema_filepath"""
-        return SCHEMAS_DIR / f"{self.name}.json"
+    # @property
+    # def schema_filepath(self) -> Path:
+    #     """Dynamicaly set schema_filepath"""
+    #     return SCHEMAS_DIR / f"{self.name}.json"
 
     @property
     def url_base(self) -> str:
