@@ -84,26 +84,15 @@ schema = th.PropertiesList(
             ),
             th.Property("internal",
                 th.ObjectType(
-                    th.Property("periodSinceTermination",
-                        th.ObjectType(
-                            th.Property("humanize", th.StringType),
-                            th.Property("sortFactor", th.IntegerType),
-                            th.Property("periodISO", th.StringType),
-                        )
-                    ),
-                    th.Property("yearsSinceTermination", th.NumberType),
+                    th.Property("periodSinceTermination", th.StringType),
+                    th.Property("yearsSinceTermination", th.StringType),
                     th.Property("terminationReason", th.StringType),
                     th.Property("probationEndDate", th.DateType),
                     th.Property("currentActiveStatusStartDate", th.DateType),
                     th.Property("terminationDate", th.DateType),
                     th.Property("status", th.StringType),
                     th.Property("terminationType", th.StringType),
-                    th.Property("notice",
-                        th.ObjectType(
-                            th.Property("length", th.IntegerType),
-                            th.Property("unit", th.StringType),
-                        )
-                    ),
+                    th.Property("notice", th.StringType),
                     th.Property("lifecycleStatus", th.StringType),
                 )
             ),
