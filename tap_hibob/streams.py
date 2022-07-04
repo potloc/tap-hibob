@@ -24,7 +24,7 @@ class EmployeesStream(HibobStream):
     def get_url_params(self, context: Optional[dict], next_page_token: Optional[Any]) -> Dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
         params["showInactive"] = "true"
-        params["humanReadable"] = "true"
+        params["includeHumanReadable"] = "true"
         return params
 
 
