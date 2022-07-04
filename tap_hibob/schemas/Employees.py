@@ -60,7 +60,7 @@ schema = th.PropertiesList(
     th.Property("humanReadable",
         th.ObjectType(
             th.Property("id", th.StringType),
-            th.Property("companyId", th.IntegerType),
+            th.Property("companyId", th.StringType),
             th.Property("email", th.StringType),
             th.Property("fullName", th.StringType),
             th.Property("firstName", th.StringType),
@@ -72,7 +72,7 @@ schema = th.PropertiesList(
                     th.Property("start_date", th.DateTimeType),
                     th.Property("manager", th.StringType),
                     th.Property("reportsToIdInComany", th.IntegerType),
-                    th.Property("employeeIdInCompany", th.IntegerType),
+                    th.Property("employeeIdInCompany", th.StringType),
                     th.Property("reportsTo",
                         th.ObjectType(
                             th.Property("id", th.StringType),
@@ -83,8 +83,8 @@ schema = th.PropertiesList(
                         )
                     ),
                     th.Property("department", th.StringType),
-                    th.Property("siteId", th.IntegerType),
-                    th.Property("isManager", th.BooleanType),
+                    th.Property("siteId", th.StringType),
+                    th.Property("isManager", th.StringType),
                     th.Property("title", th.StringType),
                     th.Property("site", th.StringType),
 
