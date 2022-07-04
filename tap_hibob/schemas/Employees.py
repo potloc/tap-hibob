@@ -73,15 +73,7 @@ schema = th.PropertiesList(
                     th.Property("manager", th.StringType),
                     th.Property("reportsToIdInComany", th.IntegerType),
                     th.Property("employeeIdInCompany", th.StringType),
-                    th.Property("reportsTo",
-                        th.ObjectType(
-                            th.Property("id", th.StringType),
-                            th.Property("email", th.StringType),
-                            th.Property("firstName", th.StringType),
-                            th.Property("surname", th.StringType),
-                            th.Property("displayName", th.StringType),
-                        )
-                    ),
+                    th.Property("reportsTo", th.StringType),
                     th.Property("department", th.StringType),
                     th.Property("siteId", th.StringType),
                     th.Property("isManager", th.StringType),
