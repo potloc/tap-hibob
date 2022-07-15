@@ -10,7 +10,7 @@ from tap_hibob.client import HibobStream
 # TODO: Delete this is if not using json files for schema definition
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
-from tap_hibob.schemas import Employees
+from tap_hibob.schemas import Employees, EmployeeHistory
 
 class EmployeesStream(HibobStream):
     """Define custom stream."""
@@ -27,5 +27,18 @@ class EmployeesStream(HibobStream):
         params["includeHumanReadable"] = "true"
         return params
 
+    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+        """Return a context dictionary for child streams."""
+        return {
+            "employee_id": record["id"]
+        }
 
 
+class EmployeeHistoryStream(HibobStream):
+    name = "employee_history"
+    path = "/v1/people/{id}/employment"
+    primary_keys = ["id"]
+    records_jsonpath = "$.values[*]"
+    replication_key = "modificationDate"
+    schema = EmployeeHistory.schema
+    parent_stream_type: EmployeesStream
