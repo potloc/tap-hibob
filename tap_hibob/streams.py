@@ -2,6 +2,7 @@
 
 from pathlib import Path
 from typing import Any, Dict, Optional, Union, List, Iterable
+from datetime import date, datetime
 
 from singer_sdk import typing as th  # JSON Schema typing helpers
 
@@ -12,8 +13,10 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
 from tap_hibob.schemas import Employees, EmployeeHistory
 
+
 class EmployeesStream(HibobStream):
     """Define custom stream."""
+
     name = "employees"
     path = "/v1/people"
     primary_keys = ["id"]
@@ -21,7 +24,9 @@ class EmployeesStream(HibobStream):
     replication_key = "creationDateTime"
     schema = Employees.schema
 
-    def get_url_params(self, context: Optional[dict], next_page_token: Optional[Any]) -> Dict[str, Any]:
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
         params["showInactive"] = "true"
         params["includeHumanReadable"] = "true"
@@ -29,16 +34,25 @@ class EmployeesStream(HibobStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        return {
-            "employee_id": record["id"]
-        }
+        if (
+            datetime.strptime(
+                str(record["work"]["activeEffectiveDate"]), "%Y-%m-%d"
+            ).date()
+            < date.today()
+        ):
+            print("Coucou")
+            return {
+                "employee_id": record["id"],
+            }
+        return {}
 
 
 class EmployeeHistoryStream(HibobStream):
+    _LOG_REQUEST_METRIC_URLS = True
     name = "employee_history"
-    path = "/v1/people/{id}/employment"
+    path = "/v1/people/{employee_id}/employment"
     primary_keys = ["id"]
     records_jsonpath = "$.values[*]"
-    replication_key = "modificationDate"
+    replication_key = "effectiveDate"
     schema = EmployeeHistory.schema
-    parent_stream_type: EmployeesStream
+    parent_stream_type = EmployeesStream
