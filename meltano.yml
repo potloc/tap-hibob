@@ -21,6 +21,7 @@ plugins:
       username: SERVICE-1726
     select:
     - '*.*'
+
   loaders:
   - name: target-jsonl
     variant: andyh1203

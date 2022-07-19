@@ -34,25 +34,19 @@ class EmployeesStream(HibobStream):
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
-        if (
-            datetime.strptime(
-                str(record["work"]["activeEffectiveDate"]), "%Y-%m-%d"
-            ).date()
-            < date.today()
-        ):
-            print("Coucou")
-            return {
-                "employee_id": record["id"],
-            }
-        return {}
+        return {
+            "employee_id": record["id"],
+        }
 
 
 class EmployeeHistoryStream(HibobStream):
     _LOG_REQUEST_METRIC_URLS = True
     name = "employee_history"
     path = "/v1/people/{employee_id}/employment"
-    primary_keys = ["id"]
+    primary_keys = ["id", "employee_id"]
     records_jsonpath = "$.values[*]"
+    replication_method = "INCREMENTAL"
     replication_key = "effectiveDate"
+    is_timestamp_replication_key = True
     schema = EmployeeHistory.schema
     parent_stream_type = EmployeesStream
