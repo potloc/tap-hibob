@@ -12,7 +12,7 @@ schema = th.PropertiesList(
     th.Property(
         "work",
         th.ObjectType(
-            th.Property("start_date", th.StringType),
+            th.Property("startDate", th.StringType),
             th.Property("manager", th.StringType),
             th.Property("reportsToIdInComany", th.IntegerType),
             th.Property("employeeIdInCompany", th.IntegerType),
