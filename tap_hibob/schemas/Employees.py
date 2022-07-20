@@ -12,7 +12,7 @@ schema = th.PropertiesList(
     th.Property(
         "work",
         th.ObjectType(
-            th.Property("start_date", th.DateTimeType),
+            th.Property("start_date", th.StringType),
             th.Property("manager", th.StringType),
             th.Property("reportsToIdInComany", th.IntegerType),
             th.Property("employeeIdInCompany", th.IntegerType),
@@ -31,7 +31,7 @@ schema = th.PropertiesList(
             th.Property("isManager", th.BooleanType),
             th.Property("title", th.StringType),
             th.Property("site", th.StringType),
-            th.Property("activeEffectiveDate", th.DateTimeType),
+            th.Property("activeEffectiveDate", th.StringType),
         ),
     ),
     th.Property(
