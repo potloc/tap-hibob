@@ -31,7 +31,7 @@ schema = th.PropertiesList(
             th.Property("isManager", th.BooleanType),
             th.Property("title", th.StringType),
             th.Property("site", th.StringType),
-            # th.Property("activeEffectiveDate", th.StringType),
+            th.Property("activeEffectiveDate", th.StringType),
         ),
     ),
     th.Property(
