@@ -40,13 +40,11 @@ class EmployeesStream(HibobStream):
 
 
 class EmployeeHistoryStream(HibobStream):
-    _LOG_REQUEST_METRIC_URLS = True
     name = "employee_history"
     path = "/v1/people/{employee_id}/employment"
     primary_keys = ["id", "employee_id"]
     records_jsonpath = "$.values[*]"
     replication_method = "INCREMENTAL"
-    replication_key = "effectiveDate"
-    is_timestamp_replication_key = True
+    replication_key = "modificationDate"
     schema = EmployeeHistory.schema
     parent_stream_type = EmployeesStream

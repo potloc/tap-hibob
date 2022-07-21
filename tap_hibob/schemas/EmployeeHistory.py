@@ -2,8 +2,8 @@ from singer_sdk import typing as th  # JSON Schema typing helpers
 
 schema = th.PropertiesList(
     th.Property("id", th.IntegerType),
-    th.Property("effectiveDate", th.DateTimeType),
-    th.Property("endEffectiveDate", th.DateTimeType),
+    th.Property("effectiveDate", th.StringType),
+    th.Property("endEffectiveDate", th.StringType),
     th.Property("isCurrent", th.BooleanType),
     th.Property("canBeDeleted", th.BooleanType),
     th.Property(
@@ -14,8 +14,8 @@ schema = th.PropertiesList(
             th.Property("changedById", th.StringType),
         ),
     ),
-    th.Property("creationDate", th.DateTimeType),
-    th.Property("modificationDate", th.DateTimeType),
+    th.Property("creationDate", th.StringType),
+    th.Property("modificationDate", th.StringType),
     th.Property("contract", th.StringType),
     th.Property("type", th.StringType),
     th.Property("calendarName", th.StringType),
@@ -24,6 +24,6 @@ schema = th.PropertiesList(
     th.Property("salaryPayType", th.StringType),
     th.Property("fte", th.IntegerType),
     th.Property("weeklyHours", th.IntegerType),
-    th.Property("activeEffectiveDate", th.DateTimeType),
+    th.Property("activeEffectiveDate", th.StringType),
     th.Property("employee_id", th.StringType),
 ).to_dict()
