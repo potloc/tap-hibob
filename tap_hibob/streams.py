@@ -45,6 +45,6 @@ class EmployeeHistoryStream(HibobStream):
     primary_keys = ["id", "employee_id"]
     records_jsonpath = "$.values[*]"
     replication_method = "INCREMENTAL"
-    replication_key = "effectiveDate"
+    replication_key = "modificationDate"
     schema = EmployeeHistory.schema
     parent_stream_type = EmployeesStream
