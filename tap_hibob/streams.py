@@ -48,3 +48,4 @@ class EmployeeHistoryStream(HibobStream):
     replication_key = "modificationDate"
     schema = EmployeeHistory.schema
     parent_stream_type = EmployeesStream
+    ignore_parent_replication_keys = True
