@@ -44,7 +44,7 @@ class EmployeeHistoryStream(HibobStream):
     path = "/v1/people/{employee_id}/employment"
     primary_keys = ["id", "employee_id"]
     records_jsonpath = "$.values[*]"
-    replication_key = "modificationDate"
+    replication_key = "creationDate"
     schema = EmployeeHistory.schema
     parent_stream_type = EmployeesStream
     ignore_parent_replication_keys = True
