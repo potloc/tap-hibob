@@ -20,7 +20,6 @@ schema = th.PropertiesList(
     th.Property("type", th.StringType),
     th.Property("calendarName", th.StringType),
     th.Property("calendarId", th.IntegerType),
-    th.Property("flsaCode", th.IntegerType),
     th.Property("salaryPayType", th.StringType),
     th.Property("fte", th.IntegerType),
     th.Property("weeklyHours", th.IntegerType),
