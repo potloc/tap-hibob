@@ -10,11 +10,17 @@ from tap_hibob.streams import (
     EmployeesStream,
     EmployeeHistoryStream,
     EmployeeTimeOffStream,
+    EmployeePayrollStream,
 )
 
 # TODO: Compile a list of custom stream types here
 #       OR rewrite discover_streams() below with your custom logic.
-STREAM_TYPES = [EmployeesStream, EmployeeHistoryStream, EmployeeTimeOffStream]
+STREAM_TYPES = [
+    EmployeesStream,
+    EmployeeHistoryStream,
+    EmployeeTimeOffStream,
+    EmployeePayrollStream,
+]
 
 
 class TapHibob(Tap):
