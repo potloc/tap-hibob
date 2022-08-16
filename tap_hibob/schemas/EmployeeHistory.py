@@ -5,7 +5,6 @@ schema = th.PropertiesList(
     th.Property("effectiveDate", th.StringType),
     th.Property("endEffectiveDate", th.StringType),
     th.Property("isCurrent", th.BooleanType),
-    th.Property("canBeDeleted", th.BooleanType),
     th.Property(
         "change",
         th.ObjectType(
