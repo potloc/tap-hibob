@@ -11,7 +11,12 @@ from tap_hibob.client import HibobStream
 # TODO: Delete this is if not using json files for schema definition
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
-from tap_hibob.schemas import Employees, EmployeeHistory, EmployeeTimeOff
+from tap_hibob.schemas import (
+    Employees,
+    EmployeeHistory,
+    EmployeeTimeOff,
+    EmployeePayroll,
+)
 
 
 class EmployeesStream(HibobStream):
@@ -63,4 +68,20 @@ class EmployeeTimeOffStream(HibobStream):
     ) -> Dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
         params["since"] = "2007-04-05T12:30-02:00"
+        return params
+
+
+class EmployeePayrollStream(HibobStream):
+    name = "employee_payroll"
+    path = "/v1/payroll/history"
+    primary_keys = ["employee_payroll.payroll.actualPayment.id"]
+    records_jsonpath = "$.employees[*]"
+    replication_key = "creationDate"
+    schema = EmployeePayroll.schema
+
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
+        params = super().get_url_params(context, next_page_token)
+        params["showInactive"] = "false"
         return params

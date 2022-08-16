@@ -11,16 +11,16 @@ plugins:
     - catalog
     - discover
     settings:
-    - name: username
-    - name: password
-      kind: password
+    # - name: username
+    # - name: password
+    #   kind: password
     - name: start_date
       value: '2010-01-01T00:00:00Z'
     config:
       start_date: '2010-01-01T00:00:00Z'
-      username: SERVICE-1726
+      #username: SERVICE-1726
     select:
-    - '*.*'
+    - 'employee_payroll.*'
 
   loaders:
   - name: target-jsonl

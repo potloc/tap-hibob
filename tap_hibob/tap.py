@@ -33,13 +33,13 @@ class TapHibob(Tap):
         th.Property(
             "username",
             th.StringType,
-            required=True,
+            required=False,
             description="Account username (only for service accounts)",
         ),
         th.Property(
             "password",
             th.StringType,
-            required=True,
+            required=False,
             description="Token associated to service account",
         ),
         th.Property(
