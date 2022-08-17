@@ -31,15 +31,21 @@ class TapHibob(Tap):
     # TODO: Update this section with the actual config values you expect:
     config_jsonschema = th.PropertiesList(
         th.Property(
+            "authorization",
+            th.StringType,
+            required=True,
+            description="Authorization token for Auth2.0",
+        ),
+        th.Property(
             "username",
             th.StringType,
-            required=False,
+            required=True,
             description="Account username (only for service accounts)",
         ),
         th.Property(
             "password",
             th.StringType,
-            required=False,
+            required=True,
             description="Token associated to service account",
         ),
         th.Property(
