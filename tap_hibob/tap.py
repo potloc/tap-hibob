@@ -37,18 +37,6 @@ class TapHibob(Tap):
             description="Authorization token for Auth2.0",
         ),
         th.Property(
-            "username",
-            th.StringType,
-            required=True,
-            description="Account username (only for service accounts)",
-        ),
-        th.Property(
-            "password",
-            th.StringType,
-            required=True,
-            description="Token associated to service account",
-        ),
-        th.Property(
             "start_date",
             th.DateTimeType,
             description="The earliest record date to sync",
