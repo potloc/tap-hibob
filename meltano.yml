@@ -1,4 +1,5 @@
 version: 1
+default_environment: staging
 send_anonymous_usage_stats: true
 project_id: tap-hibob
 plugins:
@@ -18,9 +19,29 @@ plugins:
     config:
       start_date: '2010-01-01T00:00:00Z'
     select:
-    - '*.*'
+    - 'employees.*'
 
   loaders:
   - name: target-jsonl
     variant: andyh1203
     pip_url: target-jsonl
+  - name: target-bigquery
+    variant: adswerve
+    pip_url: git+https://github.com/adswerve/target-bigquery.git@0.12.3
+    config:
+      project_id: target_bigquery_project_id
+      credentials_path: .secrets/gbq-client_secrets-staging.json
+      replication_method: truncate
+      add_metadata_columns: true
+
+environments:
+- name: staging
+  config:
+    plugins:
+      loaders:
+      - name: target-bigquery
+        config:
+          project_id: potloc-staging
+          credentials_path: .secrets/gbq-client_secrets-staging.json
+  env:
+    GOOGLE_APPLICATION_CREDENTIALS: .secrets/gbq-client_secrets-staging.json

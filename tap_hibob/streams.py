@@ -26,6 +26,7 @@ class EmployeesStream(HibobStream):
     path = "/v1/people"
     primary_keys = ["id"]
     records_jsonpath = "$.employees[*]"
+    replication_method = "INCREMENTAL"
     replication_key = "creationDateTime"
     schema = Employees.schema
 
