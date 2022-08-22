@@ -1,5 +1,4 @@
 version: 1
-default_environment: staging
 send_anonymous_usage_stats: true
 project_id: tap-hibob
 plugins:
@@ -19,7 +18,7 @@ plugins:
     config:
       start_date: '2010-01-01T00:00:00Z'
     select:
-    - 'employees.*'
+    - '*.*'
 
   loaders:
   - name: target-jsonl
