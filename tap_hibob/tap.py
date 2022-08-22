@@ -10,11 +10,17 @@ from tap_hibob.streams import (
     EmployeesStream,
     EmployeeHistoryStream,
     EmployeeTimeOffStream,
+    EmployeePayrollStream,
 )
 
 # TODO: Compile a list of custom stream types here
 #       OR rewrite discover_streams() below with your custom logic.
-STREAM_TYPES = [EmployeesStream, EmployeeHistoryStream, EmployeeTimeOffStream]
+STREAM_TYPES = [
+    EmployeesStream,
+    EmployeeHistoryStream,
+    EmployeeTimeOffStream,
+    EmployeePayrollStream,
+]
 
 
 class TapHibob(Tap):
@@ -25,16 +31,10 @@ class TapHibob(Tap):
     # TODO: Update this section with the actual config values you expect:
     config_jsonschema = th.PropertiesList(
         th.Property(
-            "username",
+            "authorization",
             th.StringType,
             required=True,
-            description="Account username (only for service accounts)",
-        ),
-        th.Property(
-            "password",
-            th.StringType,
-            required=True,
-            description="Token associated to service account",
+            description="Authorization token for Auth2.0",
         ),
         th.Property(
             "start_date",
