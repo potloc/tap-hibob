@@ -76,7 +76,7 @@ class EmployeeTimeOffStream(HibobStream):
 class EmployeePayrollStream(HibobStream):
     name = "employee_payroll"
     path = "/v1/payroll/history"
-    primary_keys = ["actual_payment_id", "id"]
+    primary_keys = ["id"]
     replication_method = "FULL_TABLE"
     records_jsonpath = "$.employees[*]"
     replication_key = "creationDate"
@@ -88,14 +88,3 @@ class EmployeePayrollStream(HibobStream):
         params = super().get_url_params(context, next_page_token)
         params["showInactive"] = "false"
         return params
-
-    def parse_response(self, response: requests.Response) -> Iterable[dict]:
-        data = response.json()["employees"]
-        ret = []
-
-        for employee in data:
-            elem = employee
-            elem["actual_payment_id"] = elem["payroll"]["actualPayment"]["id"]
-            ret.append(elem)
-
-        return ret
