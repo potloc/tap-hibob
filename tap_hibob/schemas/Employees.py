@@ -10,6 +10,14 @@ schema = th.PropertiesList(
     th.Property("displayName", th.StringType),
     th.Property("creationDateTime", th.DateTimeType),
     th.Property(
+            "internal",
+            th.ObjectType(
+                th.Property("yearsSinceTermination", th.NumberType),
+                th.Property("terminationReason", th.StringType),
+
+            ),
+        ),
+    th.Property(
         "work",
         th.ObjectType(
             th.Property(
