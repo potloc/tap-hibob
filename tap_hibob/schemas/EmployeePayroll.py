@@ -2,6 +2,7 @@ from singer_sdk import typing as th  # JSON Schema typing helpers
 
 schema = th.PropertiesList(
     th.Property("fullName", th.StringType),
+    th.Property("id", th.StringType),
     th.Property("creationDate", th.StringType),
     th.Property("displayName", th.StringType),
     th.Property("canBeDeleted", th.BooleanType),
