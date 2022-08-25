@@ -14,12 +14,7 @@ schema = th.PropertiesList(
             th.ObjectType(
                 th.Property("yearsSinceTermination", th.NumberType),
                 th.Property("terminationReason", th.StringType),
-                th.Property("probationEndDate", th.StringType),
-                th.Property("currentActiveStatusStartDate", th.StringType),
-                th.Property("terminationDate", th.StringType),
-                th.Property("status", th.StringType),
-                th.Property("terminationType", th.StringType),
-                th.Property("lifecycleStatus", th.StringType),
+
             ),
         ),
     th.Property(
