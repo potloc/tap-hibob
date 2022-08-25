@@ -1,7 +1,6 @@
 """Stream type classes for tap-hibob."""
 
 from pathlib import Path
-import requests
 from typing import Any, Dict, Optional, Union, List, Iterable
 from datetime import date, datetime
 
