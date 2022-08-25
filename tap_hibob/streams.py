@@ -1,6 +1,7 @@
 """Stream type classes for tap-hibob."""
 
 from pathlib import Path
+import requests
 from typing import Any, Dict, Optional, Union, List, Iterable
 from datetime import date, datetime
 
@@ -75,7 +76,8 @@ class EmployeeTimeOffStream(HibobStream):
 class EmployeePayrollStream(HibobStream):
     name = "employee_payroll"
     path = "/v1/payroll/history"
-    primary_keys = ["employee_payroll.payroll.actualPayment.id"]
+    primary_keys = ["actual_payment_id", "id"]
+    replication_method = "FULL_TABLE"
     records_jsonpath = "$.employees[*]"
     replication_key = "creationDate"
     schema = EmployeePayroll.schema
@@ -86,3 +88,14 @@ class EmployeePayrollStream(HibobStream):
         params = super().get_url_params(context, next_page_token)
         params["showInactive"] = "false"
         return params
+
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        data = response.json()["employees"]
+        ret = []
+
+        for employee in data:
+            elem = employee
+            elem["actual_payment_id"] = elem["payroll"]["actualPayment"]["id"]
+            ret.append(elem)
+
+        return ret
