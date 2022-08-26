@@ -75,7 +75,8 @@ class EmployeeTimeOffStream(HibobStream):
 class EmployeePayrollStream(HibobStream):
     name = "employee_payroll"
     path = "/v1/payroll/history"
-    primary_keys = ["employee_payroll.payroll.actualPayment.id"]
+    primary_keys = ["id"]
+    replication_method = "FULL_TABLE"
     records_jsonpath = "$.employees[*]"
     replication_key = "creationDate"
     schema = EmployeePayroll.schema
