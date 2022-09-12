@@ -4,9 +4,10 @@ schema = th.PropertiesList(
     th.Property("id", th.IntegerType),
     th.Property("employee_id", th.StringType),
     th.Property("effectiveDate", th.StringType),
-    th.Property("endEffectiveDate", th.StringType),
     th.Property("activeEffectiveDate", th.StringType),
+    th.Property("endEffectiveDate", th.StringType),
     th.Property("modificationDate", th.StringType),
+    th.Property("creationDate", th.StringType),
     th.Property("isCurrent", th.BooleanType),
     th.Property(
         "change",
