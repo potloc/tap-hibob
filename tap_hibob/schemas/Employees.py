@@ -43,7 +43,12 @@ schema = th.PropertiesList(
                 "customColumns",
                 th.ObjectType(
                     th.Property("column_1655996461265", th.StringType),
-                    th.Property("column_1644862416222", th.StringType),
+                    th.Property(
+                        "column_1644862416222",
+                        th.ObjectType(
+                            th.Property("value", th.StringType),
+                        ),
+                    ),
                     th.Property(
                         "column_1644861659664",
                         th.ObjectType(
@@ -130,7 +135,7 @@ schema = th.PropertiesList(
                     th.Property("indirectreports", th.StringType),
                     th.Property("tenureyears", th.StringType),
                     th.Property(
-                        "customcolumns",
+                        "customColumns",
                         th.ObjectType(
                             th.Property("column_1655996461265", th.StringType),
                             th.Property("column_1644862416222", th.StringType),
