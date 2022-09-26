@@ -12,10 +12,11 @@ from tap_hibob.client import HibobStream
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
 from tap_hibob.schemas import (
+    EmployeeEmploymentHistory,
     Employees,
-    EmployeeHistory,
     EmployeeTimeOff,
     EmployeePayroll,
+    EmployeeWorkHistory
 )
 
 
@@ -44,14 +45,25 @@ class EmployeesStream(HibobStream):
             "employee_id": record["id"],
         }
 
-
-class EmployeeHistoryStream(HibobStream):
+# TODO - Replace by employee_employment_history https://potloc.atlassian.net/browse/DE-498
+class EmployeeEmploymentHistoryStream(HibobStream):
     name = "employee_history"
     path = "/v1/people/{employee_id}/employment"
     primary_keys = ["id", "employee_id"]
     records_jsonpath = "$.values[*]"
     replication_key = "creationDate"
-    schema = EmployeeHistory.schema
+    schema = EmployeeEmploymentHistory.schema
+    parent_stream_type = EmployeesStream
+    ignore_parent_replication_keys = True
+
+
+class EmployeeWorkHistoryStream(HibobStream):
+    name = "employee_work_history"
+    path = "/v1/people/{employee_id}/work"
+    primary_keys = ["id", "employee_id"]
+    records_jsonpath = "$.values[*]"
+    replication_key = "creationDate"
+    schema = EmployeeWorkHistory.schema
     parent_stream_type = EmployeesStream
     ignore_parent_replication_keys = True
 
