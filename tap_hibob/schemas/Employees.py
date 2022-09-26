@@ -43,18 +43,8 @@ schema = th.PropertiesList(
                 "customColumns",
                 th.ObjectType(
                     th.Property("column_1655996461265", th.StringType),
-                    th.Property(
-                        "column_1644862416222",
-                        th.ObjectType(
-                            th.Property("value", th.StringType),
-                        ),
-                    ),
-                    th.Property(
-                        "column_1644861659664",
-                        th.ObjectType(
-                            th.Property("value", th.StringType),
-                        ),
-                    ),
+                    th.Property("column_1644862416222", th.ArrayType(th.StringType)),
+                    th.Property("column_1644861659664", th.ArrayType(th.StringType)),
                 ),
             ),
             th.Property(
