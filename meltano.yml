@@ -1,6 +1,6 @@
 version: 1
 send_anonymous_usage_stats: true
-project_id: tap-hibob
+project_id: fadb6424-0b8b-4e32-9dab-c46ea2634ba8
 plugins:
   extractors:
   - name: tap-hibob
@@ -18,8 +18,7 @@ plugins:
     config:
       start_date: '2010-01-01T00:00:00Z'
     select:
-    - '*.*'
-
+    - employees.*
   loaders:
   - name: target-jsonl
     variant: andyh1203
@@ -32,7 +31,6 @@ plugins:
       credentials_path: .secrets/gbq-client_secrets-staging.json
       replication_method: truncate
       add_metadata_columns: true
-
 environments:
 - name: staging
   config:

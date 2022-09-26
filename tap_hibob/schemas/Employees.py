@@ -40,21 +40,11 @@ schema = th.PropertiesList(
             th.Property("shortstartdate", th.StringType),
             th.Property("daysofpreviousservice", th.IntegerType),
             th.Property(
-                "customcolumns",
+                "customColumns",
                 th.ObjectType(
                     th.Property("column_1655996461265", th.StringType),
-                    th.Property(
-                        "column_1644862416222",
-                        th.ObjectType(
-                            th.Property("value", th.StringType),
-                        ),
-                    ),
-                    th.Property(
-                        "column_1644861659664",
-                        th.ObjectType(
-                            th.Property("value", th.StringType),
-                        ),
-                    ),
+                    th.Property("column_1644862416222", th.ArrayType(th.StringType)),
+                    th.Property("column_1644861659664", th.ArrayType(th.StringType)),
                 ),
             ),
             th.Property(
@@ -135,7 +125,7 @@ schema = th.PropertiesList(
                     th.Property("indirectreports", th.StringType),
                     th.Property("tenureyears", th.StringType),
                     th.Property(
-                        "customcolumns",
+                        "customColumns",
                         th.ObjectType(
                             th.Property("column_1655996461265", th.StringType),
                             th.Property("column_1644862416222", th.StringType),
