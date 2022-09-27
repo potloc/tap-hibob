@@ -19,10 +19,10 @@ from tap_hibob.streams import (
 #       OR rewrite discover_streams() below with your custom logic.
 STREAM_TYPES = [
     EmployeesStream,
-    # EmployeeEmploymentHistoryStream,
-    # EmployeeTimeOffStream,
-    # EmployeePayrollStream,
-    # EmployeeWorkHistoryStream
+    EmployeeEmploymentHistoryStream,
+    EmployeeTimeOffStream,
+    EmployeePayrollStream,
+    EmployeeWorkHistoryStream
 ]
 
 
