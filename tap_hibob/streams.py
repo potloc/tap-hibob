@@ -51,7 +51,8 @@ class EmployeeEmploymentHistoryStream(HibobStream):
     path = "/v1/people/{employee_id}/employment"
     primary_keys = ["id", "employee_id"]
     records_jsonpath = "$.values[*]"
-    replication_method = "FULL_TABLE"
+    replication_key = None
+    state_partitioning_keys = []
     schema = EmployeeEmploymentHistory.schema
     parent_stream_type = EmployeesStream
     ignore_parent_replication_keys = True
@@ -62,7 +63,8 @@ class EmployeeWorkHistoryStream(HibobStream):
     path = "/v1/people/{employee_id}/work"
     primary_keys = ["id", "employee_id"]
     records_jsonpath = "$.values[*]"
-    replication_method = "FULL_TABLE"
+    replication_key = None
+    state_partitioning_keys = []
     schema = EmployeeWorkHistory.schema
     parent_stream_type = EmployeesStream
     ignore_parent_replication_keys = True
@@ -73,8 +75,10 @@ class EmployeeTimeOffStream(HibobStream):
     path = "/v1/timeoff/requests/changes"
     primary_keys = ["requestId"]
     records_jsonpath = "$.changes[*]"
-    replication_key = "startDate"
+    replication_key = None
+    state_partitioning_keys = []
     schema = EmployeeTimeOff.schema
+    ignore_parent_replication_keys = True
 
     def get_url_params(
         self, context: Optional[dict], next_page_token: Optional[Any]
