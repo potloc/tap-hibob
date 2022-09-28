@@ -31,17 +31,17 @@ plugins:
     pip_url: git+https://github.com/adswerve/target-bigquery.git@0.12.3
     config:
       project_id: target_bigquery_project_id
-      credentials_path: .secrets/gbq-client_secrets-staging.json
+      credentials_path: .secrets/gbq-client_secrets-dev.json
       replication_method: truncate
       add_metadata_columns: true
 environments:
-- name: staging
+- name: dev
   config:
     plugins:
       loaders:
       - name: target-bigquery
         config:
-          project_id: potloc-staging
-          credentials_path: .secrets/gbq-client_secrets-staging.json
+          project_id: potloc-dev
+          credentials_path: .secrets/gbq-client_secrets-dev.json
   env:
-    GOOGLE_APPLICATION_CREDENTIALS: .secrets/gbq-client_secrets-staging.json
+    GOOGLE_APPLICATION_CREDENTIALS: .secrets/gbq-client_secrets-dev.json
