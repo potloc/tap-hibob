@@ -57,6 +57,7 @@ class EmployeeEmploymentHistoryStream(HibobStream):
     schema = EmployeeEmploymentHistory.schema
     parent_stream_type = EmployeesStream
     ignore_parent_replication_keys = True
+    employee_id = ""
 
     def get_url_params(
         self, context: Optional[dict], next_page_token: Optional[Any]
