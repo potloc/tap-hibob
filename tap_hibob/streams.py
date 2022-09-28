@@ -1,6 +1,7 @@
 """Stream type classes for tap-hibob."""
 
 from pathlib import Path
+import requests
 from typing import Any, Dict, Optional, Union, List, Iterable
 from datetime import date, datetime
 
@@ -57,6 +58,24 @@ class EmployeeEmploymentHistoryStream(HibobStream):
     parent_stream_type = EmployeesStream
     ignore_parent_replication_keys = True
 
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization."""
+        params = super().get_url_params(context, next_page_token)
+        self.employee_id = context["employee_id"]
+        return params
+
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        data = response.json()["values"]
+        ret = []
+        for e in data:
+            elem = e
+            elem["employee_id"] = self.employee_id
+            ret.append(elem)
+
+        return ret
+
 
 class EmployeeWorkHistoryStream(HibobStream):
     name = "employee_work_history"
@@ -68,6 +87,25 @@ class EmployeeWorkHistoryStream(HibobStream):
     schema = EmployeeWorkHistory.schema
     parent_stream_type = EmployeesStream
     ignore_parent_replication_keys = True
+    employee_id = ""
+
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization."""
+        params = super().get_url_params(context, next_page_token)
+        self.employee_id = context["employee_id"]
+        return params
+
+    def parse_response(self, response: requests.Response) -> Iterable[dict]:
+        data = response.json()["values"]
+        ret = []
+        for e in data:
+            elem = e
+            elem["employee_id"] = self.employee_id
+            ret.append(elem)
+
+        return ret
 
 
 class EmployeeTimeOffStream(HibobStream):
