@@ -127,6 +127,7 @@ schema = th.PropertiesList(
                     th.Property(
                         "customColumns",
                         th.ObjectType(
+                            th.Property("column_1664478354663", th.StringType),
                             th.Property("column_1655996461265", th.StringType),
                             th.Property("column_1644862416222", th.StringType),
                             th.Property("column_1644861659664", th.StringType),
