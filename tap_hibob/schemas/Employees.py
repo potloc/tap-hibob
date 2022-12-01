@@ -210,7 +210,7 @@ schema = th.PropertiesList(
                     th.Property(
                         "employment",
                         th.ObjectType(
-                            th.Property("siteWorkinPattern", th.StringType),
+                            th.Property("siteWorkingPattern", th.StringType),
                             th.Property("salaryPayType", th.StringType),
                             th.Property("actualWorkingPattern", th.StringType),
                             th.Property("activeeffectivedate", th.StringType),
