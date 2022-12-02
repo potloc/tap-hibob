@@ -129,41 +129,41 @@ schema = th.PropertiesList(
                     ),
                 ),
             ),
-            th.Property(
-                "deduction",
-                th.ObjectType(
-                    th.Property(
-                        "Season ticket loans",
-                        th.ObjectType(
-                            th.Property("amount", th.IntegerType),
-                        ),
-                    ),
-                    th.Property(
-                        "Cycle to work",
-                        th.ObjectType(
-                            th.Property("amount", th.IntegerType),
-                        ),
-                    ),
-                    th.Property(
-                        "Company Car",
-                        th.ObjectType(
-                            th.Property("amount", th.IntegerType),
-                        ),
-                    ),
-                    th.Property(
-                        "Childcare vouchers",
-                        th.ObjectType(
-                            th.Property("amount", th.IntegerType),
-                        ),
-                    ),
-                    th.Property(
-                        "Lunch vouchers",
-                        th.ObjectType(
-                            th.Property("amount", th.IntegerType),
-                        ),
-                    ),
-                ),
-            ),
+            # th.Property(
+            #     "deduction",
+            #     th.ObjectType(
+            #         th.Property(
+            #             "Season ticket loans",
+            #             th.ObjectType(
+            #                 th.Property("amount", th.IntegerType),
+            #             ),
+            #         ),
+            #         th.Property(
+            #             "Cycle to work",
+            #             th.ObjectType(
+            #                 th.Property("amount", th.IntegerType),
+            #             ),
+            #         ),
+            #         th.Property(
+            #             "Company Car",
+            #             th.ObjectType(
+            #                 th.Property("amount", th.IntegerType),
+            #             ),
+            #         ),
+            #         th.Property(
+            #             "Childcare vouchers",
+            #             th.ObjectType(
+            #                 th.Property("amount", th.IntegerType),
+            #             ),
+            #         ),
+            #         th.Property(
+            #             "Lunch vouchers",
+            #             th.ObjectType(
+            #                 th.Property("amount", th.IntegerType),
+            #             ),
+            #         ),
+            #     ),
+            # ),
             th.Property(
                 "variable",
                 th.ObjectType(
