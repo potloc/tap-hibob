@@ -18,10 +18,11 @@ plugins:
     config:
       start_date: '2010-01-01T00:00:00Z'
     select:
-    - employees.*
-    - employee_history.*
-    - employee_work_history.*
-    - employee_time_off.*
+    # - employees.*
+    # - employee_history.*
+    # - employee_work_history.*
+    # - employee_time_off.*
+    - employee_payroll.*
   loaders:
   - name: target-jsonl
     variant: andyh1203
