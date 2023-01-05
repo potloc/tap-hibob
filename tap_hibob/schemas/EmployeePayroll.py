@@ -30,7 +30,7 @@ schema = th.PropertiesList(
                             ),
                         ),
                         th.Property("creationDate", th.StringType),
-                        th.Property("individualPercent", th.StringType),
+                        th.Property("individualPercent", th.IntegerTypes),
                         th.Property("variableType", th.StringType),
                         th.Property("isCurrent", th.BooleanType),
                         th.Property("modificationDate", th.StringType),
