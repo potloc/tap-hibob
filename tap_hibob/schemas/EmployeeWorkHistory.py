@@ -20,5 +20,14 @@ schema = th.PropertiesList(
     th.Property("site", th.StringType),
     th.Property("title", th.StringType),
     th.Property("department", th.StringType),
-    th.Property("workChangeType", th.StringType)
+    th.Property("workChangeType", th.StringType),
+    th.Property("reportsTo",
+        th.ObjectType(
+            th.Property("id", th.StringType),
+            th.Property("firstName", th.StringType),
+            th.Property("surname", th.StringType),
+            th.Property("email", th.StringType),
+            th.Property("displayName", th.StringType),
+        )
+    )
 ).to_dict()
