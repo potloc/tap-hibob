@@ -8,7 +8,7 @@ from memoization import cached
 
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
-from singer_sdk.authenticators import APIKeyAuthenticator
+from singer_sdk.authenticators import APIKeyAuthenticator, BasicAuthenticator
 
 
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
@@ -26,13 +26,12 @@ class HibobStream(RESTStream):
     next_page_token_jsonpath = "$.next_page"  # Or override `get_next_page_token`.
 
     @property
-    def authenticator(self) -> APIKeyAuthenticator:
+    def authenticator(self) -> BasicAuthenticator:
         """Return a new authenticator object."""
-        return APIKeyAuthenticator.create_for_stream(
+        return BasicAuthenticator.create_for_stream(
             self,
-            key="authorization",
-            value=self.config.get("authorization"),
-            location="header",
+            username=self.config.get("service_account_id"),
+            password=self.config.get("service_account_password"),
         )
 
     @property
