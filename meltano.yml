@@ -26,7 +26,11 @@ plugins:
     - employee_history.*
     - employee_work_history.*
     - employee_time_off.*
-    # - employee_payroll.*
+
+  - name: tap-hibob-finance
+    inherit_from: tap-hibob
+    select:
+    - employee_payroll.*
   loaders:
   - name: target-jsonl
     variant: andyh1203
