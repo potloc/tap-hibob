@@ -26,8 +26,15 @@ class HibobStream(RESTStream):
     next_page_token_jsonpath = "$.next_page"  # Or override `get_next_page_token`.
 
     @property
-    def authenticator(self) -> BasicAuthenticator:
+    def authenticator(self):
         """Return a new authenticator object."""
+        if self.config.get("authorization", False):
+            return APIKeyAuthenticator.create_for_stream(
+                self,
+                key="authorization",
+                value=self.config.get("authorization"),
+                location="header",
+            )
         return BasicAuthenticator.create_for_stream(
             self,
             username=self.config.get("service_account_id"),
