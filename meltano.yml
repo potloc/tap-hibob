@@ -1,6 +1,7 @@
 version: 1
 send_anonymous_usage_stats: true
 project_id: fadb6424-0b8b-4e32-9dab-c46ea2634ba8
+default_environment: dev
 plugins:
   extractors:
   - name: tap-hibob
@@ -15,14 +16,17 @@ plugins:
       kind: password
     - name: start_date
       value: '2010-01-01T00:00:00Z'
+    - name: service_account_id
+    - name: service_account_password
+      kind: password
     config:
       start_date: '2010-01-01T00:00:00Z'
     select:
-    # - employees.*
-    # - employee_history.*
-    # - employee_work_history.*
-    # - employee_time_off.*
-    - employee_payroll.*
+    - employees.*
+    - employee_history.*
+    - employee_work_history.*
+    - employee_time_off.*
+    # - employee_payroll.*
   loaders:
   - name: target-jsonl
     variant: andyh1203
