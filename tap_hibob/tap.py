@@ -36,8 +36,20 @@ class TapHibob(Tap):
         th.Property(
             "authorization",
             th.StringType,
+            required=False,
+            description="DEPRECATED - Authorization token for Auth2.0",
+        ),
+        th.Property(
+            "service_account_id",
+            th.StringType,
             required=True,
-            description="Authorization token for Auth2.0",
+            description="ID of service account.",
+        ),
+        th.Property(
+            "service_account_password",
+            th.StringType,
+            required=True,
+            description="Password for associated service account.",
         ),
         th.Property(
             "start_date",
