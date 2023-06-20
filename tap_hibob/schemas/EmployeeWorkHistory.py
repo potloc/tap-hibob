@@ -25,7 +25,7 @@ schema = th.PropertiesList(
             th.Property("column_1644862416222", th.ArrayType(th.StringType)),
             th.Property("column_1664478354663", th.ArrayType(th.StringType)),
             th.Property("column_1655996461265", th.StringType),
-    ),
+    )),
     th.Property("department", th.StringType),
     th.Property("workChangeType", th.StringType),
     th.Property("reportsTo",
