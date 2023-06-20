@@ -2,15 +2,12 @@
 
 from pathlib import Path
 import requests
-from typing import Any, Dict, Optional, Union, List, Iterable
-from datetime import date, datetime
+from requests import Response
+from singer_sdk import typing # JSON Schema typing helpers
+from typing import Any, Dict, Optional, Iterable
 
-from singer_sdk import typing as th  # JSON Schema typing helpers
 
 from tap_hibob.client import HibobStream
-
-# TODO: Delete this is if not using json files for schema definition
-SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
 from tap_hibob.schemas import (
     CompanyFields,
@@ -21,6 +18,10 @@ from tap_hibob.schemas import (
     EmployeePayroll,
     EmployeeWorkHistory
 )
+
+# TODO: Delete this is if not using json files for schema definition
+SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
+
 
 
 class EmployeesStream(HibobStream):
@@ -152,19 +153,18 @@ class CompanyFieldsStream(HibobStream):
     primary_keys = ["id"]
     replication_method = "FULL_TABLE"
     records_jsonpath = "$.[*]"
-    schema = CompanyListByName.schema
+    schema = CompanyFields.schema
 
     def get_child_context(self, record: dict, context: Optional[dict]):
         """Return a context dictionary for child streams."""
-        return None
         if record.get("typeData").get("listId"):
             return {
                 "list_id": record.get("typeData").get("listId")
             }
+        return None
 
 class CompanyListByNameStream(HibobStream):
     # https://apidocs.hibob.com/reference/get_company-named-lists-listname
-    _LOG_REQUEST_METRIC_URLS=True
     name = "company_list_by_name"
     path = "/v1/company/named-lists/{list_id}"
     primary_keys = ["id"]
@@ -172,3 +172,23 @@ class CompanyListByNameStream(HibobStream):
     records_jsonpath = "$.values[*]"
     schema = CompanyListByName.schema
     parent_stream_type = CompanyFieldsStream
+    list_id = ""
+
+    def get_url_params(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Dict[str, Any]:
+        """Return a dictionary of values to be used in URL parameterization."""
+        params = super().get_url_params(context, next_page_token)
+        self.list_id = context.get("list_id")
+        return params
+
+
+    def parse_response(self, response: Response) -> Iterable[dict]:
+        data = response.json().get("values")
+        ret = []
+        for e in data:
+            elem = e
+            elem["list_id"] = self.list_id
+            elem["id"] = str(elem["id"])
+            ret.append(elem)
+        return ret
