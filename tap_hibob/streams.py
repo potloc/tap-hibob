@@ -13,6 +13,8 @@ from tap_hibob.client import HibobStream
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
 from tap_hibob.schemas import (
+    CompanyFields,
+    CompanyListByName,
     EmployeeEmploymentHistory,
     Employees,
     EmployeeTimeOff,
@@ -142,3 +144,31 @@ class EmployeePayrollStream(HibobStream):
         params = super().get_url_params(context, next_page_token)
         params["showInactive"] = "true"
         return params
+
+class CompanyFieldsStream(HibobStream):
+    # https://apidocs.hibob.com/reference/get_company-people-fields
+    name = "company_fields"
+    path = "/v1/company/people/fields"
+    primary_keys = ["id"]
+    replication_method = "FULL_TABLE"
+    records_jsonpath = "$.[*]"
+    schema = CompanyListByName.schema
+
+    def get_child_context(self, record: dict, context: Optional[dict]):
+        """Return a context dictionary for child streams."""
+        return None
+        if record.get("typeData").get("listId"):
+            return {
+                "list_id": record.get("typeData").get("listId")
+            }
+
+class CompanyListByNameStream(HibobStream):
+    # https://apidocs.hibob.com/reference/get_company-named-lists-listname
+    _LOG_REQUEST_METRIC_URLS=True
+    name = "company_list_by_name"
+    path = "/v1/company/named-lists/{list_id}"
+    primary_keys = ["id"]
+    replication_method = "FULL_TABLE"
+    records_jsonpath = "$.values[*]"
+    schema = CompanyListByName.schema
+    parent_stream_type = CompanyFieldsStream
