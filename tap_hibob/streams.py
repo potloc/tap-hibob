@@ -10,8 +10,8 @@ from typing import Any, Dict, Optional, Iterable
 from tap_hibob.client import HibobStream
 
 from tap_hibob.schemas import (
+    CompanyFieldListItems,
     CompanyFields,
-    CompanyListByName,
     EmployeeEmploymentHistory,
     Employees,
     EmployeeTimeOff,
@@ -163,14 +163,14 @@ class CompanyFieldsStream(HibobStream):
             }
         return None
 
-class CompanyListByNameStream(HibobStream):
+class CompanyFieldListItems(HibobStream):
     # https://apidocs.hibob.com/reference/get_company-named-lists-listname
-    name = "company_list_by_name"
+    name = "company_field_list_items"
     path = "/v1/company/named-lists/{list_id}"
     primary_keys = ["id"]
     replication_method = "FULL_TABLE"
     records_jsonpath = "$.values[*]"
-    schema = CompanyListByName.schema
+    schema = CompanyFieldListItems.schema
     parent_stream_type = CompanyFieldsStream
     list_id = ""
 
