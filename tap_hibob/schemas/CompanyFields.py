@@ -7,8 +7,10 @@ schema = th.PropertiesList(
     th.Property("description", th.StringType),
     th.Property("jsonPath", th.StringType),
     th.Property("type", th.StringType),
-    th.Property("typeData", th.ObjectType(
-        th.Property("listId", th.StringType)
-    )),
+    th.Property("typeData",
+        th.ObjectType(
+            th.Property("listId", th.StringType)
+        )
+    ),
     th.Property("historical", th.BooleanType)
 ).to_dict()
