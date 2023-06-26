@@ -7,22 +7,25 @@ from singer_sdk import typing as th  # JSON schema typing helpers
 
 # TODO: Import your custom stream types here:
 from tap_hibob.streams import (
+    CompanyFieldsStream,
+    CompanyFieldListItems,
     EmployeeWorkHistoryStream,
     EmployeesStream,
     EmployeeEmploymentHistoryStream,
     EmployeeTimeOffStream,
-    EmployeePayrollStream,
-    EmployeeWorkHistoryStream
+    EmployeePayrollStream
 )
 
 # TODO: Compile a list of custom stream types here
 #       OR rewrite discover_streams() below with your custom logic.
 STREAM_TYPES = [
+    CompanyFieldsStream,
+    CompanyFieldListItems,
     EmployeesStream,
     EmployeeEmploymentHistoryStream,
     EmployeeTimeOffStream,
     EmployeePayrollStream,
-    EmployeeWorkHistoryStream
+    EmployeeWorkHistoryStream,
 ]
 
 

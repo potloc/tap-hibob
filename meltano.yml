@@ -22,10 +22,12 @@ plugins:
     config:
       start_date: '2010-01-01T00:00:00Z'
     select:
-    - employees.*
-    - employee_history.*
-    - employee_work_history.*
-    - employee_time_off.*
+    - company_fields.*
+    - company_list_by_name.*
+    # - employees.*
+    # - employee_history.*
+    # - employee_work_history.*
+    # - employee_time_off.*
 
   - name: tap-hibob-finance
     inherit_from: tap-hibob
