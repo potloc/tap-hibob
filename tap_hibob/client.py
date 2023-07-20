@@ -100,3 +100,8 @@ class HibobStream(RESTStream):
         """As needed, append or transform raw data to match expected structure."""
         # TODO: Delete this method if not needed.
         return row
+
+    def backoff_max_tries(self) -> int:
+        # https://sdk.meltano.com/en/latest/classes/singer_sdk.RESTStream.html#singer_sdk.RESTStream.backoff_max_tries
+        # Default value is set to 5 in the docs, upgrading to 6
+        return 6
