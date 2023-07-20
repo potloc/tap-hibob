@@ -100,3 +100,6 @@ class HibobStream(RESTStream):
         """As needed, append or transform raw data to match expected structure."""
         # TODO: Delete this method if not needed.
         return row
+
+    def backoff_max_tries(self) -> int:
+        return 6
