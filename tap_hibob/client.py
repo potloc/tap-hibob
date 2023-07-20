@@ -103,5 +103,5 @@ class HibobStream(RESTStream):
 
     def backoff_max_tries(self) -> int:
         # https://sdk.meltano.com/en/latest/classes/singer_sdk.RESTStream.html#singer_sdk.RESTStream.backoff_max_tries
-        # Default value is set to 5 in the docs, upgrading to 6 
+        # Default value is set to 5 in the docs, upgrading to 6
         return 6
