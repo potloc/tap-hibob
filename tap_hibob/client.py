@@ -1,15 +1,13 @@
 """REST client handling, including HibobStream base class."""
 
-import requests
 from pathlib import Path
-from typing import Any, Dict, Optional, Union, List, Iterable
+from typing import Any, Dict, Iterable, List, Optional, Union
 
+import requests
 from memoization import cached
-
+from singer_sdk.authenticators import APIKeyAuthenticator, BasicAuthenticator
 from singer_sdk.helpers.jsonpath import extract_jsonpath
 from singer_sdk.streams import RESTStream
-from singer_sdk.authenticators import APIKeyAuthenticator, BasicAuthenticator
-
 
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
@@ -103,5 +101,7 @@ class HibobStream(RESTStream):
 
     def backoff_max_tries(self) -> int:
         # https://sdk.meltano.com/en/latest/classes/singer_sdk.RESTStream.html#singer_sdk.RESTStream.backoff_max_tries
-        # Default value is set to 5 in the docs, upgrading to 6
-        return 6
+        # Default value is set to 5, making dynaminc
+        # This is an exponential backoff - 2, 4, 8, 16, 32
+        # -> Setting the number of retries allows us to circumvente rate limits.
+        return self.config["backoff_max_tries"]
