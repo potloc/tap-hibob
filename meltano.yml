@@ -19,8 +19,11 @@ plugins:
     - name: service_account_id
     - name: service_account_password
       kind: password
+    - name: backoff_max_tries
+      kind: integer
     config:
       start_date: '2010-01-01T00:00:00Z'
+      backoff_max_tries: 6
     select:
     - company_fields.*
     - company_list_by_name.*

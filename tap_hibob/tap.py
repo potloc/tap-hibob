@@ -2,18 +2,18 @@
 
 from typing import List
 
-from singer_sdk import Tap, Stream
+from singer_sdk import Stream, Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
 # TODO: Import your custom stream types here:
 from tap_hibob.streams import (
-    CompanyFieldsStream,
     CompanyFieldListItems,
-    EmployeeWorkHistoryStream,
-    EmployeesStream,
+    CompanyFieldsStream,
     EmployeeEmploymentHistoryStream,
+    EmployeePayrollStream,
+    EmployeesStream,
     EmployeeTimeOffStream,
-    EmployeePayrollStream
+    EmployeeWorkHistoryStream,
 )
 
 # TODO: Compile a list of custom stream types here
@@ -64,6 +64,17 @@ class TapHibob(Tap):
             th.StringType,
             default="https://api.hibob.com",
             description="The url for the API service",
+        ),
+        th.Property(
+            "backoff_max_tries",
+            th.IntegerType,
+            default=5,
+            description="""
+                https://sdk.meltano.com/en/latest/classes/singer_sdk.RESTStream.html#singer_sdk.RESTStream.backoff_max_tries
+                Default value is set to 5, making dynamic
+                This is an exponential backoff - 2, 4, 8, 16, 32
+                -> Setting the number of retries allows us to circumvente rate limits.
+            """,
         ),
     ).to_dict()
 
