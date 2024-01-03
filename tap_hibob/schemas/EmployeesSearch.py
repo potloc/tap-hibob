@@ -10,13 +10,13 @@ schema = th.PropertiesList(
     th.Property("displayName", th.StringType),
     th.Property("creationDateTime", th.DateTimeType),
     th.Property(
-        "internal",
-        th.ObjectType(
-            th.Property("terminationReason", th.StringType),
-            th.Property("probationEndDate", th.StringType),
-            th.Property("terminationDate", th.StringType),
+            "internal",
+            th.ObjectType(
+                th.Property("terminationReason", th.StringType),
+                th.Property("probationEndDate", th.StringType),
+                th.Property("terminationDate", th.StringType),
+            ),
         ),
-    ),
     th.Property(
         "work",
         th.ObjectType(
@@ -37,7 +37,7 @@ schema = th.PropertiesList(
             th.Property("department", th.StringType),
             th.Property("isManager", th.BooleanType),
             th.Property("title", th.StringType),
-            th.Property("site", th.StringType),
+            th.Property("site", th.StringType)
         ),
     ),
     th.Property(
@@ -56,37 +56,17 @@ schema = th.PropertiesList(
             th.Property(
                 "work",
                 th.ObjectType(
-                    th.Property("startdate", th.StringType),
-                    th.Property("shortstartdate", th.StringType),
-                    th.Property("manager", th.StringType),
-                    th.Property("reportsToIdInComany", th.IntegerType),
-                    th.Property("employeeIdInCompany", th.StringType),
-                    th.Property("reportsTo", th.StringType),
                     th.Property("department", th.StringType),
-                    th.Property("siteId", th.StringType),
                     th.Property("isManager", th.StringType),
                     th.Property("title", th.StringType),
                     th.Property("site", th.StringType),
-                    th.Property("durationofemployment", th.StringType),
-                    th.Property("daysofpreviousservice", th.StringType),
-                    th.Property("directreports", th.StringType),
-                    th.Property("tenureduration", th.StringType),
-                    th.Property("activeeffectivedate", th.StringType),
-                    th.Property("tenuredurationyears", th.StringType),
-                    th.Property("yearsofservice", th.StringType),
-                    th.Property("secondlevelmanager", th.StringType),
-                    th.Property("indirectreports", th.StringType),
-                    th.Property("tenureyears", th.StringType),
                     th.Property(
                         "customColumns",
                         th.ObjectType(
+                            th.Property("column_1664478354663", th.StringType),
                             th.Property("column_1655996461265", th.StringType),
-                            th.Property(
-                                "column_1644862416222", th.ArrayType(th.StringType)
-                            ),
-                            th.Property(
-                                "column_1644861659664", th.ArrayType(th.StringType)
-                            ),
+                            th.Property("column_1644862416222", th.StringType),
+                            th.Property("column_1644861659664", th.StringType),
                         ),
                     ),
                     th.Property(
