@@ -41,7 +41,6 @@ class EmployeesStream(HibobStream):
         self, context: Optional[dict], next_page_token: Optional[Any]
     ) -> Dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
-        params["showInactive"] = "true"
         params["humanReadable"] = "APPEND"
         return params
 
@@ -52,7 +51,9 @@ class EmployeesStream(HibobStream):
 
         By default, no payload will be sent (return None).
         """
-        return {}
+        return {
+            "showInactive": True
+        }
 
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
