@@ -1,6 +1,7 @@
 """Hibob tap class."""
 
 from singer_sdk import Tap
+from typing import List
 from singer_sdk import typing as th  # JSON schema typing helpers
 
 from tap_hibob import streams
@@ -54,7 +55,7 @@ class TapHibob(Tap):
         ),
     ).to_dict()
 
-    def discover_streams(self) -> list[streams.HibobStream]:
+    def discover_streams(self) -> List[streams.HibobStream]:
         """Return a list of discovered streams.
 
         Returns:
