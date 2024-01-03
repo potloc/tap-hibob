@@ -1,33 +1,9 @@
 """Hibob tap class."""
 
-from typing import List
-
-from singer_sdk import Stream, Tap
+from singer_sdk import Tap
 from singer_sdk import typing as th  # JSON schema typing helpers
 
-# TODO: Import your custom stream types here:
-from tap_hibob.streams import (
-    CompanyFieldListItems,
-    CompanyFieldsStream,
-    EmployeeEmploymentHistoryStream,
-    EmployeePayrollStream,
-    EmployeesStream,
-    EmployeeTimeOffStream,
-    EmployeeWorkHistoryStream,
-)
-
-# TODO: Compile a list of custom stream types here
-#       OR rewrite discover_streams() below with your custom logic.
-STREAM_TYPES = [
-    CompanyFieldsStream,
-    CompanyFieldListItems,
-    EmployeesStream,
-    EmployeeEmploymentHistoryStream,
-    EmployeeTimeOffStream,
-    EmployeePayrollStream,
-    EmployeeWorkHistoryStream,
-]
-
+from tap_hibob import streams
 
 class TapHibob(Tap):
     """Hibob tap class."""
@@ -78,10 +54,19 @@ class TapHibob(Tap):
         ),
     ).to_dict()
 
-    def discover_streams(self) -> List[Stream]:
-        """Return a list of discovered streams."""
-        return [stream_class(tap=self) for stream_class in STREAM_TYPES]
+    def discover_streams(self) -> list[streams.HibobStream]:
+        """Return a list of discovered streams.
 
-
-if __name__ == "__main__":
-    TapHibob.cli()
+        Returns:
+            A list of discovered streams.
+        """
+        return [
+            streams.CompanyFieldsStream(self),
+            streams.CompanyFieldListItems(self),
+            streams.EmployeesStream(self),
+            streams.EmployeeEmploymentHistoryStream(self),
+            streams.EmployeeTimeOffStream(self),
+            streams.EmployeePayrollStream(self),
+            streams.EmployeeWorkHistoryStream(self),
+            streams.EmployeesSearchStream(self),
+        ]

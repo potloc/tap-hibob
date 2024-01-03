@@ -3,7 +3,6 @@
 from pathlib import Path
 import requests
 from requests import Response
-from singer_sdk import typing # JSON Schema typing helpers
 from typing import Any, Dict, Optional, Iterable
 
 
@@ -23,8 +22,8 @@ from tap_hibob.schemas import (
 SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
 
-
 class EmployeesStream(HibobStream):
+    # Will be deprecated by March 2024. See here: https://apidocs.hibob.com/reference/get_people
     """Define custom stream."""
 
     name = "employees"
@@ -42,6 +41,62 @@ class EmployeesStream(HibobStream):
         params["showInactive"] = "true"
         params["includeHumanReadable"] = "true"
         return params
+
+    def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
+        """Return a context dictionary for child streams."""
+        return {
+            "employee_id": record["id"],
+        }
+
+class EmployeesSearchStream(HibobStream):
+    # https://apidocs.hibob.com/reference/post_people-search
+    """
+        This API returns a list of requested employees with requested fields.
+        The data is filtered based on the requested fields and access level of the logged-in user.
+        Only viewable categories are returned.
+        Supported user types: Service.
+    """
+
+    name = "employees_search"
+    path = "/v1/people/search"
+    primary_keys = ["id"]
+    records_jsonpath = "$.employees[*]"
+    replication_method = "INCREMENTAL"
+    replication_key = "creationDateTime"
+    rest_method = "POST"
+    schema = Employees.schema
+
+    def prepare_request_payload(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Optional[dict]:
+        """Prepare the data payload for the REST API request.
+
+        By default, no payload will be sent (return None).
+        """
+        return {
+            "fields":[
+                "/root/displayName",
+                "/root/firstName",
+                "/root/fullName",
+                "/root/surname",
+                "/root/email",
+                "/root/creationDateTime",
+                "/personal/pronouns",
+                "/payroll/employment/type",
+                "/payroll/employment/contract",
+                "/work/customColumns/column_1644862416222",
+                "/work/customColumns/column_1644861659664",
+                "/work/custom/field_1651169416679",
+                "/work/title",
+                "/work/site",
+                "/work/department",
+                "/internal/terminationReason",
+                "/internal/probationEndDate",
+                "/internal/terminationDate"
+            ],
+            "showInactive": True,
+            "humanReadable": "APPEND"
+        }
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""
