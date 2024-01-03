@@ -25,14 +25,16 @@ SCHEMAS_DIR = Path(__file__).parent / Path("./schemas")
 
 
 class EmployeesStream(HibobStream):
+    # https://apidocs.hibob.com/reference/post_people-search
     """Define custom stream."""
 
     name = "employees"
-    path = "/v1/people"
+    path = "/v1/people/search"
     primary_keys = ["id"]
     records_jsonpath = "$.employees[*]"
     replication_method = "INCREMENTAL"
     replication_key = "creationDateTime"
+    rest_method = "POST"
     schema = Employees.schema
 
     def get_url_params(
@@ -40,8 +42,18 @@ class EmployeesStream(HibobStream):
     ) -> Dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
         params["showInactive"] = "true"
-        params["includeHumanReadable"] = "true"
+        params["humanReadable"] = "APPEND"
         return params
+
+    def prepare_request_payload(
+        self, context: Optional[dict], next_page_token: Optional[Any]
+    ) -> Optional[dict]:
+        """Prepare the data payload for the REST API request.
+
+        By default, no payload will be sent (return None).
+        """
+        return {}
+
 
     def get_child_context(self, record: dict, context: Optional[dict]) -> dict:
         """Return a context dictionary for child streams."""

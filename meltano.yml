@@ -25,9 +25,9 @@ plugins:
       start_date: '2010-01-01T00:00:00Z'
       backoff_max_tries: 6
     select:
-    - company_fields.*
-    - company_list_by_name.*
-    # - employees.*
+    # - company_fields.*
+    # - company_list_by_name.*
+    - employees.*
     # - employee_history.*
     # - employee_work_history.*
     # - employee_time_off.*
