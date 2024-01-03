@@ -3,7 +3,6 @@
 from pathlib import Path
 import requests
 from requests import Response
-from singer_sdk import typing # JSON Schema typing helpers
 from typing import Any, Dict, Optional, Iterable
 
 
