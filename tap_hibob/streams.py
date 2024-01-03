@@ -13,6 +13,7 @@ from tap_hibob.schemas import (
     CompanyFields,
     EmployeeEmploymentHistory,
     Employees,
+    EmployeesSearch,
     EmployeeTimeOff,
     EmployeePayroll,
     EmployeeWorkHistory
@@ -64,7 +65,7 @@ class EmployeesSearchStream(HibobStream):
     replication_method = "INCREMENTAL"
     replication_key = "creationDateTime"
     rest_method = "POST"
-    schema = Employees.schema
+    schema = EmployeesSearch.schema
 
     def prepare_request_payload(
         self, context: Optional[dict], next_page_token: Optional[Any]
@@ -76,6 +77,7 @@ class EmployeesSearchStream(HibobStream):
         return {
             "fields":[
                 "/root/displayName",
+                "/root/companyId",
                 "/root/firstName",
                 "/root/fullName",
                 "/root/surname",
@@ -90,6 +92,7 @@ class EmployeesSearchStream(HibobStream):
                 "/work/title",
                 "/work/site",
                 "/work/department",
+                "/work/isManager",
                 "/internal/terminationReason",
                 "/internal/probationEndDate",
                 "/internal/terminationDate"
