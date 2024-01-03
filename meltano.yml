@@ -27,7 +27,8 @@ plugins:
     select:
     # - company_fields.*
     # - company_list_by_name.*
-    - employees.*
+    # - employees.*
+    - employees_search.*
     # - employee_history.*
     # - employee_work_history.*
     # - employee_time_off.*
