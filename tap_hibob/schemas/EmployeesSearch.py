@@ -13,6 +13,7 @@ schema = th.PropertiesList(
         "internal",
         th.ObjectType(
             th.Property("terminationReason", th.StringType),
+            th.Property("terminationType", th.StringType),
             th.Property("probationEndDate", th.StringType),
             th.Property("terminationDate", th.StringType),
         ),
@@ -26,6 +27,7 @@ schema = th.PropertiesList(
                     th.Property("column_1655996461265", th.StringType),
                     th.Property("column_1644862416222", th.ArrayType(th.StringType)),
                     th.Property("column_1644861659664", th.ArrayType(th.StringType)),
+                    th.Property("column_1664478354663", th.ArrayType(th.StringType)),
                 ),
             ),
             th.Property(
@@ -42,15 +44,16 @@ schema = th.PropertiesList(
     ),
     th.Property(
         "payroll",
+        th.ObjectType(
+            th.Property(
+                "employment",
                 th.ObjectType(
-                    th.Property(
-                        "employment",
-                        th.ObjectType(
-                            th.Property("type", th.StringType),
-                            th.Property("contract", th.StringType),
-                        ),
-                    ),
+                    th.Property("type", th.StringType),
+                    th.Property("contract", th.StringType),
+                    th.Property("weeklyHours", th.IntegerType),
                 ),
+            ),
+        ),
     ),
     th.Property(
         "personal",
@@ -99,6 +102,7 @@ schema = th.PropertiesList(
                 "internal",
                 th.ObjectType(
                     th.Property("terminationReason", th.StringType),
+                    th.Property("terminationType", th.StringType),
                     th.Property("probationEndDate", th.StringType),
                     th.Property("terminationDate", th.StringType),
                 ),
@@ -117,6 +121,7 @@ schema = th.PropertiesList(
                         th.ObjectType(
                             th.Property("type", th.StringType),
                             th.Property("contract", th.StringType),
+                            th.Property("weeklyHours", th.StringType),
                         ),
                     ),
                 ),
@@ -136,6 +141,10 @@ schema = th.PropertiesList(
     ),
     th.Property(
         "/work/customColumns/column_1644861659664",
+        th.ObjectType(th.Property("value", th.ArrayType(th.StringType))),
+    ),
+    th.Property(
+        "/work/customColumns/column_1664478354663",
         th.ObjectType(th.Property("value", th.ArrayType(th.StringType))),
     ),
     th.Property("/work/department", th.ObjectType(th.Property("value", th.StringType))),
@@ -158,6 +167,10 @@ schema = th.PropertiesList(
         th.ObjectType(th.Property("value", th.StringType)),
     ),
     th.Property(
+        "/payroll/employment/weeklyHours",
+        th.ObjectType(th.Property("value", th.IntegerType)),
+    ),
+    th.Property(
         "/internal/terminationDate",
         th.ObjectType(th.Property("value", th.DateTimeType)),
     ),
@@ -166,6 +179,10 @@ schema = th.PropertiesList(
     ),
     th.Property(
         "/internal/terminationReason",
+        th.ObjectType(th.Property("value", th.StringType)),
+    ),
+    th.Property(
+        "/internal/terminationType",
         th.ObjectType(th.Property("value", th.StringType)),
     ),
     th.Property(
