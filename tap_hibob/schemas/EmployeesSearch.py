@@ -41,6 +41,24 @@ schema = th.PropertiesList(
         ),
     ),
     th.Property(
+        "payroll",
+                th.ObjectType(
+                    th.Property(
+                        "employment",
+                        th.ObjectType(
+                            th.Property("type", th.StringType),
+                            th.Property("contract", th.StringType),
+                        ),
+                    ),
+                ),
+    ),
+    th.Property(
+        "personal",
+        th.ObjectType(
+            th.Property("pronouns", th.StringType),
+        ),
+    ),
+    th.Property(
         "humanReadable",
         th.ObjectType(
             th.Property("id", th.StringType),
@@ -106,17 +124,18 @@ schema = th.PropertiesList(
         ),
     ),
     th.Property("/work/site", th.ObjectType(th.Property("value", th.StringType))),
+    th.Property("/work/title", th.ObjectType(th.Property("value", th.StringType))),
     th.Property("/work/isManager", th.ObjectType(th.Property("value", th.BooleanType))),
     th.Property(
         "/work/custom/field_1651169416679",
         th.ObjectType(th.Property("value", th.StringType)),
     ),
     th.Property(
-        "column_1644862416222",
+        "/work/customColumns/column_1644862416222",
         th.ObjectType(th.Property("value", th.ArrayType(th.StringType))),
     ),
     th.Property(
-        "column_1644861659664",
+        "/work/customColumns/column_1644861659664",
         th.ObjectType(th.Property("value", th.ArrayType(th.StringType))),
     ),
     th.Property("/work/department", th.ObjectType(th.Property("value", th.StringType))),
@@ -147,6 +166,10 @@ schema = th.PropertiesList(
     ),
     th.Property(
         "/internal/terminationReason",
+        th.ObjectType(th.Property("value", th.StringType)),
+    ),
+    th.Property(
+        "/personal/pronouns",
         th.ObjectType(th.Property("value", th.StringType)),
     ),
 ).to_dict()
