@@ -119,7 +119,7 @@ class EmployeeEmploymentHistoryStream(HibobStream):
     replication_key = None
     state_partitioning_keys = []
     schema = EmployeeEmploymentHistory.schema
-    parent_stream_type = EmployeesStream
+    parent_stream_type = EmployeesSearchStream
     ignore_parent_replication_keys = True
     employee_id = ""
 
@@ -150,7 +150,7 @@ class EmployeeWorkHistoryStream(HibobStream):
     replication_key = None
     state_partitioning_keys = []
     schema = EmployeeWorkHistory.schema
-    parent_stream_type = EmployeesStream
+    parent_stream_type = EmployeesSearchStream
     ignore_parent_replication_keys = True
     employee_id = ""
 
