@@ -6,9 +6,8 @@ updates:
     directory: /
     registries: "*"
     schedule:
-      interval: weekly
-      day: monday
-      time: "08:30"
+      interval: daily
+      time: "10:00"
       timezone: America/Montreal
     reviewers:
       - potloc/data-engineering
@@ -34,8 +33,7 @@ updates:
     open-pull-requests-limit: 5
     directory: /
     schedule:
-      interval: weekly
-      day: monday
+      interval: daily
       time: "10:00"
       timezone: America/Montreal
     reviewers:
